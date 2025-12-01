@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> road safety </title>
+    <style>
+        body {
+            background: #eef;
+            font-family: Arial;
+            overflow: hidden;
+        }
+
+        #road {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            background: #555;
+            margin-top: 50px;
+            border-top: 10px solid #333;
+            border-bottom: 10px solid #333;
+            overflow: hidden;
+        }
+
+        /* Center Divider */
+        #divider {
+            position: absolute;
+            left: 0;
+            top: 105px; /* middle of road */
+            width: 100%;
+            height: 10px;
+            background: repeating-linear-gradient(
+                to right,
+                #fff 0px,
+                #fff 30px,
+                transparent 30px,
+                transparent 60px
+            );
+        }
+
+        #car {
+            position: absolute;
+            width: 120px;
+            left: 0;
+            top: 30px; /* car in top lane */
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 22px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1> today we will learn about road safety </h1>
+
+<div id="road">
+    <div id="divider"></div>
+
+    <img id="car" src="carorangetopfixedtwo.png" >
+</div>
+
+<button id="startBtn">Start Moving ▶️</button>
+
+<script>
+    const car = document.getElementById("car");
+    const btn = document.getElementById("startBtn");
+
+    let position = 0;
+    let speed = 3; // slow speed
+    let started = false;
+
+    btn.addEventListener("click", () => {
+        if (!started) {
+            started = true;
+            btn.disabled = true; // prevent second press
+            animate();
+        }
+    });
+
+    function animate() {
+        position += speed;
+        car.style.left = position + "px";
+
+        // Reset to start when car goes off screen
+        if (position > window.innerWidth) {
+            position = -150;
+        }
+
+        requestAnimationFrame(animate);
+    }
+</script>
+
+</body>
+</html>
